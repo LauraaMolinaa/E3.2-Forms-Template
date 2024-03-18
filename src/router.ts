@@ -1,7 +1,9 @@
 import { IncomingMessage, ServerResponse } from "http";
 import {
+    createPokemon,
     getAllPokemon,
     getHome,
+    getNewForm,
     getOnePokemon,
 } from "./controller";
 
@@ -25,3 +27,5 @@ export const routes: Routes = {
 routes.GET["/"] = getHome;
 routes.GET["/pokemon"] = getAllPokemon;
 routes.GET["/pokemon/:id"] = getOnePokemon;
+routes.GET["/pokemon/new"] = getNewForm;
+routes.POST["/pokemon"] = createPokemon;
