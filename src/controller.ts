@@ -29,13 +29,16 @@ export const createPokemon = async (
       type: newPokemon.type
     });
 
-    res.statusCode = 201; 
-    res.setHeader("Content-Type", "text/html");
-    res.end(await renderTemplate("src/views/ListView.hbs"));
+    res.statusCode = 303;
+    res.setHeader("Location", "/pokemon");
+    res.end();
+    //res.statusCode = 200;
+    //res.setHeader("Content-Type", "text/html");
+    //res.end(await renderTemplate("src/views/ListView.hbs", {pokemon: database}));
     //res.end(body);
 };
 
-export const getAllPokemon = (req: IncomingMessage, res: ServerResponse) => {
+export const getAllPokemon = async (req: IncomingMessage, res: ServerResponse) => {
     if(req.method === "GET" && req.url === "/pokemon")
     {
         res.statusCode = 200
@@ -46,7 +49,8 @@ export const getAllPokemon = (req: IncomingMessage, res: ServerResponse) => {
         //null: specifications (none for us)
         //2: number of spaces
         res.setHeader("Content-Type", "text/html")
-        res.end(JSON.stringify({message, payload}, null, 2))
+        res.end(await renderTemplate("src/views/ListView.hbs", { pokemon: database}));
+        //res.end(JSON.stringify({message, payload}, null, 2))
     }
     
 }
